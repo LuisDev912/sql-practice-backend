@@ -2,6 +2,8 @@ import Database from 'better-sqlite3';
 
 export const db = new Database(':memory:');
 
+// --- main table ---
+
 db.exec(`
     CREATE TABLE users (
         id INTEGER PRIMARY KEY,
@@ -10,3 +12,14 @@ db.exec(`
         age INTEGER
     );
 `);
+
+// --- demo table ---
+
+db.exec(`
+    CREATE TABLE demo_table (
+        id INTEGER PRIMARY KEY,
+        user_name TEXT NOT NULL,
+        null_example NULL,
+        is_active BOOLEAN NOT NULL CHECK (is_active IN (0, 1))
+    );
+`)
