@@ -2,7 +2,13 @@ import Database from 'better-sqlite3';
 
 export const db = new Database(':memory:');
 
+/* === TABLES ===*/
+
 // --- main table ---
+db.exec(
+    // `DROP TABLE users;` this will cause an error because the users table isn't defined yet
+    `DROP TABLE IF EXISTS users;`
+)
 
 db.exec(`
     CREATE TABLE users (
@@ -14,17 +20,16 @@ db.exec(`
 `);
 
 // --- demo table ---
-
 db.exec(`
     CREATE TABLE demo_table (
         id INTEGER PRIMARY KEY,
         user_name TEXT NOT NULL,
-        null_example NULL,
+        invalid_type WRONGTYPE,
         is_active BOOLEAN NOT NULL CHECK (is_active IN (0, 1))
     );
 `);
 
-// --- SELECT statements ---
+/* === TESTS STATEMENTS === */
 
 const getUsers = db.prepare('SELECT * FROM users;').all();
 const getDemoTable = db.prepare('SELECT * FROM demo_table;').all();
