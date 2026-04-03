@@ -22,4 +22,12 @@ db.exec(`
         null_example NULL,
         is_active BOOLEAN NOT NULL CHECK (is_active IN (0, 1))
     );
-`)
+`);
+
+// --- SELECT statements ---
+
+const getUsers = db.prepare('SELECT * FROM users;').all();
+const getDemoTable = db.prepare('SELECT * FROM demo_table;').all();
+
+console.log(getUsers);
+console.log(getDemoTable);
