@@ -1,7 +1,11 @@
 import { db } from '../01-tables/tables.ts';
 
-const insert = db.prepare(`
+/* === INSERT QUERIES === */
+const firstInsert = db.prepare(`
     INSERT INTO users (name, salary, age) VALUES (?, ?, ?);
 `);
 
-insert.run('John Doe', 1500, 19);
+// --- run insert queries ---
+firstInsert.run('John Doe', 1500, 19);
+firstInsert.run('Guillermo', 2500, 37);
+firstInsert.run(0, '', '20'); // test query
