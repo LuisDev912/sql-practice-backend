@@ -29,6 +29,10 @@ db.exec(`
     );
 `);
 
+db.exec(`
+    ALTER TABLE demo_table ADD email TEXT;
+`);
+
 /* === TESTS STATEMENTS === */
 
 const getUsers = db.prepare('SELECT * FROM users;').all();
