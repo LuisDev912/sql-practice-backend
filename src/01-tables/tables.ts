@@ -15,6 +15,7 @@ db.exec(`
         id INTEGER PRIMARY KEY,
         name TEXT NOT NULL,
         salary INTEGER,
+        currency TEXT NOT NULL,
         age INTEGER
     );
 `);
