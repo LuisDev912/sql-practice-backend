@@ -16,7 +16,7 @@ db.exec(`
         name TEXT NOT NULL,
         salary INTEGER,
         currency TEXT NOT NULL,
-        age INTEGER
+        age INTEGER NOT NULL CHECK (age > 13)
     );
 `);
 
@@ -33,11 +33,3 @@ db.exec(`
 db.exec(`
     ALTER TABLE demo_table ADD email TEXT;
 `);
-
-/* === TESTS STATEMENTS === */
-
-const getUsers = db.prepare('SELECT * FROM users;').all();
-const getDemoTable = db.prepare('SELECT * FROM demo_table;').all();
-
-console.log(getUsers);
-console.log(getDemoTable);
