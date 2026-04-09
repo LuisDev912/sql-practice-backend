@@ -1,6 +1,9 @@
 import Database from 'better-sqlite3';
 
-export const db = new Database(':memory:');
+export const db = new Database('dev.db');
+
+db.pragma('journal_mode = WAL');
+db.pragma('foreign_keys = ON');
 
 /* === TABLES ===*/
 
@@ -8,7 +11,9 @@ export const db = new Database(':memory:');
 db.exec(
     // `DROP TABLE users;` this will cause an error because the users table isn't defined yet
     `DROP TABLE IF EXISTS users;`
-)
+);
+
+db.exec(`DROP TABLE IF EXISTS demo_table;`);
 
 db.exec(`
     CREATE TABLE users (
