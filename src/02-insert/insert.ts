@@ -1,4 +1,4 @@
-import { db } from '../01-tables/tables.ts';
+import { db } from '../db.ts';
 
 /* === INSERT QUERIES === */
 const firstInsert = db.prepare(`
