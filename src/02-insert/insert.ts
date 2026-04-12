@@ -11,7 +11,7 @@ firstInsert.run('Guillermo', 3.471465, 'ars', 37);
 firstInsert.run('DROP TABLE users); --', 3.471465, 'ars', 37);
 firstInsert.run(0, '', '', '20'); // test query
 
-/* === INSERT STATEMENTS === */
+/* ===  SELECT STATEMENTS === */
 const getUsers = db.prepare('SELECT * FROM users;').all();
 
 console.table(getUsers);
