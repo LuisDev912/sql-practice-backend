@@ -4,6 +4,7 @@ import { db } from '../db.ts';
 
 const getAllUsers = db.prepare('SELECT * FROM users;').all();
 const getFirstUsers = db.prepare('SELECT * FROM users LIMIT 3;').all();
+const getDifferentUsers = db.prepare('SELECT DISTINCT name FROM users;').all();
 // --- operators ---
 const johnUsers = db.prepare("SELECT * FROM users WHERE name = 'John Doe';").all();
 const belowThirtyAge = db.prepare("SELECT * FROM users WHERE age < 30;").all();
@@ -16,6 +17,7 @@ const similarAges = db.prepare('SELECT * FROM users WHERE age BETWEEN 18 AND 25'
 // show the information
 console.table(getAllUsers);
 console.table(getFirstUsers);
+console.table(getDifferentUsers);
 console.table(johnUsers);
 console.table(belowThirtyAge);
 console.table(notDollarSalaryUsers);
