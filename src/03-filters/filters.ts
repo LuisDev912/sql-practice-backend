@@ -75,16 +75,28 @@ const selectUsersWithPagination = db.prepare(`
     LIMIT ? OFFSET ?;
 `);
 
-// show the information
-console.table(selectBasicUsers.all());
-console.table(selectDistinctNames.all());
-console.table(selectUsersByName.all());
-console.table(selectUsersBelowAge.all());
-console.table(selectUsersByCurrency.all());
-console.table(selectUsersByPattern.all());
-console.table(selectUsersNotIn.all());
-console.table(selectUsersBetweenAges.all());
-console.table(selectUsersOrdered.all());
-console.table(selectUsersOrderedDesc.all());
-console.table(selectUsersWithLimit.all(3));
-console.table(selectUsersWithPagination.all(5, 10),);
+/* === EXECUTION === */
+const results = {
+    allUsers: selectBasicUsers.all(),
+    distinctNames: selectDistinctNames.all(),
+
+    johnUsers: selectUsersByName.all('John Doe'),
+    belowThirty: selectUsersBelowAge.all(30),
+    notUSD: selectUsersByCurrency.all('USD'),
+
+    similarNames: selectUsersByPattern.all('_uillermo'),
+    differentNames: selectUsersNotIn.all('Guillermo'),
+    ageRange: selectUsersBetweenAges.all(18, 25),
+
+    asc: selectUsersOrdered.all(),
+    desc: selectUsersOrderedDesc.all(),
+
+    firstUsers: selectUsersWithLimit.all(3),
+    paginated: selectUsersWithPagination.all(5, 10),
+};
+
+// --- output ---
+Object.entries(results).forEach(([key, value]) => {
+    console.log(`\n=== ${key.toUpperCase()} ===`);
+    console.table(value);
+});
