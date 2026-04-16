@@ -1,35 +1,90 @@
 import { db } from '../db.ts';
 
-/* === SELECT + WHERE STATEMENTS === */
+/* === PREPARED STATEMENTS === */
 
-// note: it is a good practice to select the rows we want to get instead of all the rows. Here I do it this way for learning purposes.
-const getAllUsers = db.prepare('SELECT * FROM users;').all();
-const getDifferentUsers = db.prepare('SELECT DISTINCT name FROM users;').all();
-// --- operators ---
-const johnUsers = db.prepare("SELECT * FROM users WHERE name = 'John Doe';").all();
-const belowThirtyAge = db.prepare("SELECT * FROM users WHERE age < 30;").all();
-const notDollarSalaryUsers = db.prepare("SELECT * FROM users WHERE currency != 'USD'").all();
+// --- base queries ---
+const selectBasicUsers = db.prepare(`
+    SELECT id, name, age FROM users;
+`);
+
+const selectDistinctNames = db.prepare(`
+    SELECT DISTINCT name FROM users;
+`);
+
+// --- filters ---
+const selectUsersByName = db.prepare(`
+    SELECT id, name, age
+    FROM users
+    WHERE name = ?;
+`);
+
+const selectUsersBelowAge = db.prepare(`
+    SELECT id, name, age
+    FROM users
+    WHERE age < ?;
+`);
+
+const selectUsersByCurrency = db.prepare(`
+    SELECT id, name, salary, currency
+    FROM users
+    WHERE currency != ?;
+`);
+
 // --- advanced search ---
-const similarNames = db.prepare("SELECT * FROM users WHERE name LIKE '_uillermo'").all();
-const differentNames = db.prepare("SELECT * FROM users WHERE name NOT IN ('Guillermo')").all();
-const similarAges = db.prepare('SELECT * FROM users WHERE age BETWEEN 18 AND 25').all();
+const selectUsersByPattern = db.prepare(`
+    SELECT id, name
+    FROM users
+    WHERE name LIKE ?;
+`);
+
+const selectUsersNotIn = db.prepare(`
+    SELECT id, name
+    FROM users
+    WHERE name NOT IN (?);
+`);
+
+const selectUsersBetweenAges = db.prepare(`
+    SELECT id, name, age
+    FROM users
+    WHERE age BETWEEN ? AND ?;
+`);
+
 // --- order ---
-const ascendentUsers = db.prepare('SELECT * FROM users ORDER BY name;').all(); // the ASC value is the default value
-const descendentUsers = db.prepare('SELECT * FROM users ORDER BY name DESC;').all();
+const selectUsersOrdered = db.prepare(`
+    SELECT id, name, age
+    FROM users
+    ORDER BY name ASC;
+`);
+
+const selectUsersOrderedDesc = db.prepare(`
+    SELECT id, name, age
+    FROM users
+    ORDER BY name DESC;
+`);
+
 // --- pagination ---
-const getFirstUsers = db.prepare('SELECT * FROM users LIMIT 3;').all();
-const getLastUsers = db.prepare('SELECT * FROM users LIMIT 5 OFFSET 10;').all();
+const selectUsersWithLimit = db.prepare(`
+    SELECT id, name
+    FROM users
+    LIMIT ?;
+`);
+
+const selectUsersWithPagination = db.prepare(`
+    SELECT id, name
+    FROM users
+    LIMIT ? OFFSET ?;
+`);
 
 // show the information
-console.table(getAllUsers);
-console.table(getDifferentUsers);
-console.table(johnUsers);
-console.table(belowThirtyAge);
-console.table(notDollarSalaryUsers);
-console.table(similarNames);
-console.table(differentNames);
-console.table(similarAges);
-console.table(ascendentUsers);
-console.table(descendentUsers);
-console.table(getFirstUsers);
-console.table(getLastUsers);
+console.table(selectBasicUsers.all());
+console.table(selectDistinctNames.all());
+console.table(selectUsersByName.all());
+console.table(selectUsersBelowAge.all());
+console.table(selectUsersByCurrency.all());
+console.table(selectUsersByPattern.all());
+console.table(selectUsersNotIn.all());
+console.table(selectUsersBetweenAges.all());
+console.table(selectUsersOrdered.all());
+console.table(selectUsersOrderedDesc.all());
+console.table(selectUsersWithLimit.all(3));
+console.table(selectUsersWithPagination.all(5, 10),);
