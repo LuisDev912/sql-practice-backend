@@ -19,6 +19,13 @@ db.exec(`
     );
 `);
 
+db.exec(`
+    CREATE TABLE companies(
+        id INTEGER PRIMARY KEY,
+        name TEXT NOT NULL
+    );
+`);
+
 // --- demo table ---
 db.exec(`
     CREATE TABLE demo_table (
