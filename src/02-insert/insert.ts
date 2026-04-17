@@ -9,6 +9,10 @@ const secondInsert = db.prepare(`
     INSERT INTO companies (name) VALUES (?);
 `);
 
+const thirdInsert = db.prepare(`
+    INSERT INTO jobs (title, company_id) VALUES (?, ?);
+`);
+
 // --- run insert queries ---
 firstInsert.run('John Doe', 1500, 'USD', 19);
 firstInsert.run('Guillermo', 3471465, 'ars', 37);
@@ -24,9 +28,15 @@ secondInsert.run('Apple');
 secondInsert.run('Globant');
 secondInsert.run('Meta');
 
+thirdInsert.run('Frontend Dev', 3); // Vercel
+thirdInsert.run('Backend Dev', 4);  // Microsoft
+thirdInsert.run('Game Developer', 1); // Bungie
+
 /* ===  SELECT STATEMENTS === */
 const getUsers = db.prepare('SELECT name, salary, currency, age FROM users;').all();
 const getCompanies = db.prepare('SELECT name FROM companies;').all();
+const getJobs = db.prepare('SELECT title, company_id FROM jobs;').all();
 
 console.table(getUsers);
 console.table(getCompanies);
+console.table(getJobs);
