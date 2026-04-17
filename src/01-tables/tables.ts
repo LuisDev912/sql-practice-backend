@@ -10,7 +10,7 @@ import { db } from "../db.ts";
 db.exec(`DROP TABLE IF EXISTS demo_table;`);
 
 db.exec(`
-    CREATE TABLE users (
+    CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY,
         name TEXT NOT NULL,
         salary INTEGER,
@@ -20,16 +20,16 @@ db.exec(`
 `);
 
 db.exec(`
-    CREATE TABLE companies(
+    CREATE TABLE IF NOT EXISTS companies(
         id INTEGER PRIMARY KEY,
         name TEXT NOT NULL
     );
 `);
 
 db.exec(`
-    CREATE TABLE jobs(
+    CREATE TABLE IF NOT EXISTS jobs(
         id INTEGER PRIMARY KEY,
-        title TEXT NOT NULL
+        title TEXT NOT NULL,
         company_id INTEGER,
         FOREIGN KEY (company_id) REFERENCES companies(id)
     );
@@ -37,7 +37,7 @@ db.exec(`
 
 // --- demo table ---
 db.exec(`
-    CREATE TABLE demo_table (
+    CREATE TABLE IF NOT EXISTS demo_table (
         id INTEGER PRIMARY KEY,
         user_name TEXT NOT NULL,
         invalid_type WRONGTYPE,
