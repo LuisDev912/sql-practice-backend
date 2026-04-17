@@ -2,10 +2,10 @@ import { db } from "../db.ts";
 /* === TABLES ===*/
 
 // --- main table ---
-db.exec(
-    // `DROP TABLE users;` this will cause an error because the users table isn't defined yet
-    `DROP TABLE IF EXISTS users;`
-);
+// db.exec(
+//     // `DROP TABLE users;` this will cause an error because the users table isn't defined yet
+//     `DROP TABLE IF EXISTS users;`
+// );
 
 db.exec(`DROP TABLE IF EXISTS demo_table;`);
 
@@ -23,6 +23,15 @@ db.exec(`
     CREATE TABLE companies(
         id INTEGER PRIMARY KEY,
         name TEXT NOT NULL
+    );
+`);
+
+db.exec(`
+    CREATE TABLE jobs(
+        id INTEGER PRIMARY KEY,
+        title TEXT NOT NULL
+        company_id INTEGER,
+        FOREIGN KEY (company_id) REFERENCES companies(id)
     );
 `);
 
