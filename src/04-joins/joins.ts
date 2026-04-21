@@ -15,6 +15,30 @@ const joinWithAlias = db.prepare(`
     JOIN companies c ON j.company_id = c.id;
 `).all();
 
+// --- left join ---
+const leftJoin = db.prepare(`
+    SELECT j.title, c.name 
+    FROM jobs j
+    LEFT JOIN companies c ON j.company_id = c.id;
+`).all();
+
+// --- right join ---
+const rightJoin = db.prepare(`
+    SELECT j.title, c.name
+    FROM companies c
+    RIGHT JOIN jobs j ON c.id = j.company_id;
+`).all();
+
+// --- full outer join ---
+const fullOuterJoin = db.prepare(`
+    SELECT j.title, c.name
+    FROM jobs j
+    FULL OUTER JOIN companies c ON j.company_id = c.id;
+`).all();
+
 /* === OUTPUT === */
 console.table(selectJobsWithCompanies);
 console.table(joinWithAlias);
+console.table(leftJoin);
+console.table(rightJoin);
+console.table(fullOuterJoin);
