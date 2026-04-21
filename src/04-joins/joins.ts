@@ -36,9 +36,18 @@ const fullOuterJoin = db.prepare(`
     FULL OUTER JOIN companies c ON j.company_id = c.id;
 `).all();
 
+// --- anti-join pattern ---
+const antiJoinPattern = db.prepare(`
+    SELECT c.name
+    FROM companies c
+    LEFT JOIN jobs j ON c.id = j.company_id
+    WHERE j.id IS NULL;
+`).all();
+
 /* === OUTPUT === */
 console.table(selectJobsWithCompanies);
 console.table(joinWithAlias);
 console.table(leftJoin);
 console.table(rightJoin);
 console.table(fullOuterJoin);
+console.table(antiJoinPattern);
