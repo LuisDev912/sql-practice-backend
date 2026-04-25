@@ -35,6 +35,15 @@ db.exec(`
     );
 `);
 
+db.exec(`
+    CREATE TABLE job_technologies (
+        job_id INTEGER,
+        technology TEXT,
+        PRIMARY KEY (job_id, technology),
+        FOREIGN KEY (job_id) REFERENCES jobs(id)
+    );
+`);
+
 // --- demo table ---
 db.exec(`
     CREATE TABLE IF NOT EXISTS demo_table (
