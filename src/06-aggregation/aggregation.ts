@@ -10,4 +10,15 @@ const usersByAge = db.prepare(`
     FROM users;
 `).all();
 
+const usersByCurrency = db.prepare(`
+    SELECT name || '(' || currency || ')', salary
+    FROM users;
+`).all();
+
+const usersWithoutSymbols = db.prepare(`
+    SELECT REPLACE(name, '-', '') FROM users;
+`).all();
+
 console.table(usersByAge);
+console.table(usersByCurrency);
+console.table(usersWithoutSymbols);
