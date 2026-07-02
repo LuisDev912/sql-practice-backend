@@ -19,6 +19,12 @@ const usersWithoutSymbols = db.prepare(`
     SELECT REPLACE(name, '-', '') FROM users;
 `).all();
 
+const roundedUsersSalary = db.prepare(`
+    SELECT name, ROUND(salary, 2) AS rounded_salary FROM users;
+`).all();
+
+// logs
 console.table(usersByAge);
 console.table(usersByCurrency);
 console.table(usersWithoutSymbols);
+console.table(roundedUsersSalary);
