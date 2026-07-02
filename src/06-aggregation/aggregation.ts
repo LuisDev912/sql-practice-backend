@@ -1,5 +1,6 @@
 import { db } from '../db.ts';
 
+// conditionals
 const usersByAge = db.prepare(`
     SELECT name, age,
         CASE
@@ -20,11 +21,13 @@ const userByLength = db.prepare(`
     FROM users;
 `).all();
 
+// concatenation
 const usersByCurrency = db.prepare(`
     SELECT name, salary || ' (' || currency || ')' AS salary_with_currency
     FROM users;
 `).all();
 
+// string methods
 const usersWithoutSymbols = db.prepare(`
     SELECT REPLACE(name, '-', '') AS name FROM users;
 `).all();
@@ -33,6 +36,7 @@ const firstCompaniesCharacters = db.prepare(`
     SELECT SUBSTR(name, 0, 6) FROM companies;
 `).all();
 
+// number methods
 const roundedUsersSalary = db.prepare(`
     SELECT name, ROUND(salary, 2) AS rounded_salary FROM users;
 `).all();
