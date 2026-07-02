@@ -11,7 +11,7 @@ const usersByAge = db.prepare(`
 `).all();
 
 const usersByCurrency = db.prepare(`
-    SELECT name || '(' || currency || ')' AS name, salary
+    SELECT name, salary || ' (' || currency || ')' AS salary_with_currency
     FROM users;
 `).all();
 
