@@ -11,12 +11,12 @@ const usersByAge = db.prepare(`
 `).all();
 
 const usersByCurrency = db.prepare(`
-    SELECT name || '(' || currency || ')', salary
+    SELECT name || '(' || currency || ')' AS name, salary
     FROM users;
 `).all();
 
 const usersWithoutSymbols = db.prepare(`
-    SELECT REPLACE(name, '-', '') FROM users;
+    SELECT REPLACE(name, '-', '') AS name FROM users;
 `).all();
 
 const roundedUsersSalary = db.prepare(`
