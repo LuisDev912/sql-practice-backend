@@ -1,13 +1,15 @@
 import { db } from '../db.ts';
 
+/* === EXPRESSIONS === */
+
 // conditionals
 const usersByAge = db.prepare(`
     SELECT name, age,
         CASE
             WHEN age < 26 THEN 'young'
-            WHEN age <= 45 then 'young adult'
+            WHEN age <= 45 THEN 'young adult'
             ELSE 'adult'
-        END as user_age
+        END AS user_age
     FROM users;
 `).all();
 
@@ -41,7 +43,10 @@ const roundedUsersSalary = db.prepare(`
     SELECT name, ROUND(salary, 2) AS rounded_salary FROM users;
 `).all();
 
-// logs
+/* === AGGREGATION === */
+
+
+/* === LOGS ===*/
 console.table(usersByAge);
 console.table(userByLength);
 console.table(usersByCurrency);
