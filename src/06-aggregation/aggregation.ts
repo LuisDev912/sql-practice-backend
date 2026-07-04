@@ -44,12 +44,43 @@ const roundedUsersSalary = db.prepare(`
 `).all();
 
 /* === AGGREGATION === */
+const countRows = db.prepare(`
+    SELECT COUNT(*) AS rows FROM jobs;
+`).all();
 
+const sumSalaries = db.prepare(`
+    SELECT name, SUM(salary) AS salary FROM users;
+`).all();
+
+const averageUserAge = db.prepare(`
+    SELECT name, AVG(age) AS age FROM users;
+`).all();
+
+const roundAverageUserAge = db.prepare(`
+    SELECT ROUND(AVG(age)) AS age FROM users;
+`).all();
+
+const minUserAge = db.prepare(`
+    SELECT name, MIN(age) AS age FROM users;
+`).all();
+
+const maxUserAge = db.prepare(`
+    SELECT name, MAX(age) AS age FROM users;
+`).all();
 
 /* === LOGS ===*/
+
+// expressions
 console.table(usersByAge);
 console.table(userByLength);
 console.table(usersByCurrency);
 console.table(usersWithoutSymbols);
 console.table(firstCompaniesCharacters);
 console.table(roundedUsersSalary);
+// aggregations
+console.table(countRows);
+console.table(sumSalaries);
+console.table(averageUserAge);
+console.table(roundAverageUserAge);
+console.table(minUserAge);
+console.table(maxUserAge);
