@@ -45,8 +45,14 @@ const roundedUsersSalary = db.prepare(`
 
 /* === AGGREGATION === */
 const countRows = db.prepare(`
-    SELECT COUNT(*) AS total_rows FROM jobs;
+    SELECT COUNT(*) AS total_rows FROM job_technologies;
 `).all();
+
+const countRow = db.prepare(`
+    SELECT COUNT(technology) AS technology_count FROM job_technologies;
+`).all();
+
+// note: COUNT(*) counts all rows displaying even the rows with NULL values. COUNT(column), instead, counts only the rows where the value is not NULL.
 
 const sumSalaries = db.prepare(`
     SELECT name, SUM(salary) AS salary_sum FROM users;
@@ -79,6 +85,7 @@ console.table(firstCompaniesCharacters);
 console.table(roundedUsersSalary);
 // aggregations
 console.table(countRows);
+console.table(countRow);
 console.table(sumSalaries);
 console.table(averageUserAge);
 console.table(roundAverageUserAge);
