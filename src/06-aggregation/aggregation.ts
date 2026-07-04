@@ -65,7 +65,7 @@ const averageUserAge = db.prepare(`
 `).all();
 
 const roundAverageUserAge = db.prepare(`
-    SELECT ROUND(AVG(age)) AS average_age FROM users;
+    SELECT ROUND(AVG(age)) AS rounded_average_age FROM users;
 `).all();
 
 const minUserAge = db.prepare(`
