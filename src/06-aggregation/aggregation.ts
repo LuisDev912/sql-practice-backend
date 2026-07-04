@@ -44,6 +44,8 @@ const roundedUsersSalary = db.prepare(`
 `).all();
 
 /* === AGGREGATION === */
+
+// functions
 const countRows = db.prepare(`
     SELECT COUNT(*) AS total_rows FROM job_technologies;
 `).all();
@@ -74,6 +76,20 @@ const maxUserAge = db.prepare(`
     SELECT name, MAX(age) AS max_age FROM users;
 `).all();
 
+// combining functions
+const functionsCombination = db.prepare(`
+    SELECT 
+        COUNT(*) AS total_rows,
+        MIN(age) AS min_user_age,
+        MAX(age) AS max_user_age,
+        AVG(salary) AS average_salary
+    FROM users;
+`).all();
+
+// using filters
+
+// values concatenation
+
 /* === LOGS ===*/
 
 // expressions
@@ -91,3 +107,4 @@ console.table(averageUserAge);
 console.table(roundAverageUserAge);
 console.table(minUserAge);
 console.table(maxUserAge);
+console.table(functionsCombination);
