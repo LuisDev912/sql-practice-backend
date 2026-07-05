@@ -96,7 +96,12 @@ const longNameCompanies = db.prepare(`
 `).all();
 
 // values concatenation
-
+const usersWithCurrency = db.prepare(`
+    SELECT
+        name, GROUP_CONCAT(currency)
+    FROM users
+    GROUP BY name;
+`).all();
 
 /* === LOGS ===*/
 
@@ -118,3 +123,4 @@ console.table(maxUserAge);
 console.table(functionsCombination);
 console.table(usersAboveAge);
 console.table(longNameCompanies);
+console.table(usersWithCurrency);
