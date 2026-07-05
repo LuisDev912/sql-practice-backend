@@ -1,12 +1,16 @@
 # 06-aggregation
 
-This practice is orientated on learning the basics of the **aggregations** in SQL.
+This practice is orientated on learning the basics of the **aggregations** and **expressions** in SQL. The code is divided in 3 parts: one for the expression queries, other for the aggregation queries, and other for the logs.
 
 ---
 
 ## Concepts practiced
 
-- 
+- Aggregation functions
+- Text concatenation
+- Conditionals in SQL
+- Numeric and text functions
+- Combining functions and filters
 
 ---
 
