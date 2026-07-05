@@ -98,7 +98,7 @@ const longNameCompanies = db.prepare(`
 // values concatenation
 const usersWithCurrency = db.prepare(`
     SELECT
-        name, GROUP_CONCAT(currency)
+        name, GROUP_CONCAT(currency) AS currency
     FROM users
     GROUP BY name;
 `).all();
