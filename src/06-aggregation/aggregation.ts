@@ -87,10 +87,6 @@ const functionsCombination = db.prepare(`
 `).all();
 
 // using filters
-const usersAboveAge = db.prepare(`
-    SELECT name, age FROM users WHERE age > 18;
-`).all();
-
 const longNameCompanies = db.prepare(`
     SELECT name FROM companies WHERE LENGTH(name) > 12;
 `).all();
@@ -121,6 +117,5 @@ console.table(roundAverageUserAge);
 console.table(minUserAge);
 console.table(maxUserAge);
 console.table(functionsCombination);
-console.table(usersAboveAge);
 console.table(longNameCompanies);
 console.table(usersWithCurrency);
