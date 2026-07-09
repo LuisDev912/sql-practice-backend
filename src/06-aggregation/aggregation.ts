@@ -99,6 +99,12 @@ const usersWithCurrency = db.prepare(`
     GROUP BY name;
 `).all();
 
+/* === GROUP BY & HAVING === */
+
+// GROUP BY
+
+// HAVING
+
 /* === LOGS ===*/
 
 // expressions
