@@ -102,8 +102,22 @@ const usersWithCurrency = db.prepare(`
 /* === GROUP BY & HAVING === */
 
 // GROUP BY
+const countTechnologiesInJobs = db.prepare(`
+    SELECT 
+        j.title,
+        COUNT(jt.technology) AS technologies_count
+    FROM jobs j
+    JOIN job_technologies jt ON j.id = jt.job_id
+    GROUP BY j.id;
+`).all();
 
 // HAVING
+const havingQueryExample = db.prepare(`
+    SELECT name, COUNT(*) AS total
+    FROM users
+    GROUP BY name
+    HAVING COUNT(*) > 1;
+`).all();
 
 /* === LOGS ===*/
 
@@ -125,3 +139,6 @@ console.table(maxUserAge);
 console.table(functionsCombination);
 console.table(longNameCompanies);
 console.table(usersWithCurrency);
+// GROUP BY & HAVING
+console.table(countTechnologiesInJobs);
+console.table(havingQueryExample);
