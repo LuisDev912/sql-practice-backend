@@ -54,7 +54,3 @@ db.exec(`
         is_active BOOLEAN NOT NULL CHECK (is_active IN (0, 1))
     );
 `);
-
-db.exec(`
-    ALTER TABLE demo_table ADD email TEXT;
-`);
