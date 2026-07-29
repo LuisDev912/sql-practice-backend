@@ -116,7 +116,7 @@ const havingQueryExample = db.prepare(`
     SELECT name, COUNT(*) AS total
     FROM users
     GROUP BY name
-    HAVING COUNT(*) > 1;
+    HAVING COUNT(*) > 5;
 `).all();
 
 /* === LOGS ===*/
