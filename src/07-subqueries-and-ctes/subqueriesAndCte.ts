@@ -13,6 +13,11 @@ const subqueryInSelect = db.prepare(`
     FROM users;
 `).all();
 
+/* --- with IN --- */
+
+/* --- EXISTS and NOT EXISTS ---*/
+
+
 /* === CTEs === */
 
 
