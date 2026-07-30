@@ -8,8 +8,14 @@ const usersWithOldestAge = db.prepare(`
     WHERE age = (SELECT MAX(age) FROM users);    
 `).all();
 
-/* === CTES === */
+const subqueryInSelect = db.prepare(`
+    SELECT name, salary, (SELECT MAX(salary) FROM users) AS max_salary
+    FROM users;
+`).all();
+
+/* === CTEs === */
 
 
 /* === LOGS ===*/
 console.table(usersWithOldestAge);
+console.table(subqueryInSelect);
